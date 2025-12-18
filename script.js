@@ -1,4 +1,5 @@
-let allElems=document.querySelectorAll('.elem');
+function opnefeature(){
+    let allElems=document.querySelectorAll('.elem');
  let allFullElems = document.querySelectorAll('.fullElems')
  let allFullElemBackbtn = document.querySelectorAll('.back')
 allElems.forEach((elem)=>{
@@ -9,6 +10,10 @@ allFullElems[elem.id].style.display = 'block'
 
 allFullElemBackbtn.forEach((back)=>{
 back.addEventListener("click",()=>{
-    
+
+allFullElems[back.id].style.display = 'none'
+
 })
 })
+}
+opnefeature()
