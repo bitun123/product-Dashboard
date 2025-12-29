@@ -284,13 +284,11 @@ section.todo-list-full-page .todo-container .allTask .task details{
     position: absolute;
     width:10rem;
     top: 2.2rem;
-    right: 0%;  
+    right: 8%;  
     z-index: 999;
  
 }
-section.todo-list-full-page .todo-container .allTask .task details::-webkit-scrollbar{
-    display: none;
-}
+
 section.todo-list-full-page .todo-container .allTask .task details p{
     width: 100%;
     padding: 0.5rem;
