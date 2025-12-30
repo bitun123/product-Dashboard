@@ -314,6 +314,22 @@ section.todo-list-full-page .todo-container .allTask .task button:active {
     scale: 0.95;
 }
 
+.daily-list-full-page{
+display: block;
+}
+.daily-list-full-page h2{
+    font-size: 2rem;
+}
+
+.daily-list-full-page .day-planner-time{
+    background-color: var(--backgroundColorMain);
+    height: 85%;
+    margin-top: 8rem;
+    width: 100%;
+    border-radius: 1rem;
+}
+
+
 @media (min-width:912px) {
     section.allElems {
         align-items: flex-start;
