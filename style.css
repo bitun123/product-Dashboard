@@ -103,7 +103,7 @@ section.fullElems {
     height: 100%;
     background-color: var(--backgroundColorMain);
     display: none;
-    position: absolute;
+    position: fixed;
 }
 
 section.todo-list-full-page {
@@ -322,7 +322,8 @@ section.todo-list-full-page .todo-container .allTask .task button:active {
 
 .daily-list-full-page h1 {
     color: white;
-    font-size: 2.2rem;
+    font-size: 1.2rem;
+padding-left: 1rem;
 }
 
 .daily-list-full-page .day-planner {
@@ -331,11 +332,12 @@ section.todo-list-full-page .todo-container .allTask .task button:active {
     padding: 2rem;
     background-color: var(--backgroundColorMain);
    display: flex;
+ 
    flex-wrap: wrap;
    align-items: flex-start;
-   justify-content: space-between;
+   /* justify-content: space-between; */
    overflow: auto;
-   margin-top: 2rem;
+   margin-top: 3rem;
 
 }
 
@@ -345,8 +347,8 @@ section.todo-list-full-page .todo-container .allTask .task button:active {
      position: relative;
     /* padding: 1rem; */
     /* background-color: red; */
-    margin-bottom: 2rem;
-    width: 49%;
+    margin-bottom: 1rem;
+    width: 100%;
 }
 
 .day-planner .day-planner-time input {
@@ -418,5 +420,13 @@ section.todo-list-full-page .todo-container .allTask .task button:active {
 
     section.todo-list-full-page .todo-container .allTask .task button {
         font-size: 1.2rem;
+    }
+    section.daily-list-full-page .day-planner{
+        flex-direction: row;
+         justify-content: space-between;
+    }
+    .daily-list-full-page .day-planner .day-planner-time {
+        width: 49%;
+        margin-bottom: 2rem;
     }
 }
