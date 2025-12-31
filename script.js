@@ -96,8 +96,8 @@ taskContainer.addEventListener("click", (e) => {
  todoList()
 
 
-
-let hours =  Array.from({length: 18},(elem,idx)=>`${6+ idx} :00 - ${7+idx}:00`)
+function dailyPlan(){
+  let hours =  Array.from({length: 18},(elem,idx)=>`${6+ idx} :00 - ${7+idx}:00`)
 let dayPlanData = JSON.parse(localStorage.getItem('dayPlanData')) || {};
 let dayPlanner = document.querySelector('.day-planner');
 let wholedaySum = ''
@@ -106,7 +106,7 @@ hours.forEach((elem,idx)=>{
   let saveData = dayPlanData[idx] || ""
 wholedaySum = wholedaySum + `   <div class="day-planner-time">
                     <p>${elem}</p>
-                    <input id = ${idx} type="text" placeholder="....." value = ${saveData}>
+                    <input id = ${idx} type="text" placeholder="....." value =" ${saveData}">
                 </div>
              `
 })
@@ -114,8 +114,10 @@ wholedaySum = wholedaySum + `   <div class="day-planner-time">
 dayPlanner.innerHTML  = wholedaySum;
 let dayPlannerInput  = document.querySelectorAll('.day-planner input');
 dayPlannerInput.forEach((elem)=>{
-elem.addEventListener('input',function(){
+elem.addEventListener('input',function(e){
 dayPlanData[elem.id] = elem.value;
 localStorage.setItem('dayPlanData',JSON.stringify(dayPlanData));
 })
 })
+}
+dailyPlan()

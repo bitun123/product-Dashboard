@@ -316,9 +316,9 @@ section.todo-list-full-page .todo-container .allTask .task button:active {
     scale: 0.95;
 }
 
-.daily-list-full-page {
+/* .daily-list-full-page {
     display: block;
-}
+} */
 
 .daily-list-full-page h1 {
     color: white;
@@ -367,7 +367,7 @@ padding-left: 1rem;
     position: absolute;
     top: 2%;
     left: 1%;
-    color: black;
+    color: rgba(255, 255, 0, 0.814);
     font-weight: 550;
 }
 
@@ -421,6 +421,10 @@ padding-left: 1rem;
     section.todo-list-full-page .todo-container .allTask .task button {
         font-size: 1.2rem;
     }
+       section.daily-list-full-page h1{
+        font-size: 2rem;
+        color: rgba(255, 255, 0, 0.477);
+       }
     section.daily-list-full-page .day-planner{
         flex-direction: row;
          justify-content: space-between;
