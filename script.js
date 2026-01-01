@@ -90,7 +90,7 @@ function todoList() {
 }
 
 todoList();
-
+// ================== DAILY-PLAN ==================
 function dailyPlan() {
   let hours = Array.from(
     { length: 18 },
@@ -122,20 +122,105 @@ function dailyPlan() {
 }
 dailyPlan();
 
+// ================== MOTIVATION ==================
 
-
-function motivation(){
-  
-let motivationAuthor = document.querySelector(".motivation-3 h1");
-let motivationQuote = document.querySelector(".motivation-2 p");
-async function fetchQuote() {
-  const response = await fetch("https://dummyjson.com/quotes/random");
-  let data = await response.json();
-  console.log(data);
-  motivationQuote.innerHTML = `${data.quote} ,,`;
-  motivationAuthor.innerHTML = `- ${data.author}`;
+function motivation() {
+  let motivationAuthor = document.querySelector(".motivation-3 h1");
+  let motivationQuote = document.querySelector(".motivation-2 p");
+  async function fetchQuote() {
+    const response = await fetch("https://dummyjson.com/quotes/random");
+    let data = await response.json();
+    motivationQuote.innerHTML = `${data.quote} ,,`;
+    motivationAuthor.innerHTML = `- ${data.author}`;
+  }
+  fetchQuote();
 }
-fetchQuote();
+motivation();
 
+
+
+
+
+
+
+
+
+// ================= SELECT =================
+const headings = document.querySelectorAll(".heading h1");
+const timerText = document.querySelector(".timer h2");
+const startBtn = document.querySelector(".btn .promodoro-btn2");
+const pouseBtn = document.querySelector(".btn .promodoro-btn3");
+const resetBtn = document.querySelector(".btn .promodoro-btn1");
+
+// ================= TIME VALUES =================
+const TIMES = {
+  pomodoro: 25 * 60,
+  short: 5 * 60,
+  long: 10 * 60,
+};
+
+// ================= DEFAULT STATE =================
+let currentMode = "pomodoro";   // ✅ default
+let totalSeconds = TIMES[currentMode];
+let interval = null;
+
+// ================= UPDATE TIMER =================
+function updateTimer() {
+  let min = Math.floor(totalSeconds / 60);
+  let sec = totalSeconds % 60;
+  sec = sec < 10 ? "0" + sec : sec;
+  timerText.textContent = `${String(min).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
 }
-motivation()
+
+// ================= MODE CHANGE =================
+headings.forEach(h => {
+  h.addEventListener("click", () => {
+
+    // active class switch
+    headings.forEach(x => x.classList.remove("active"));
+    h.classList.add("active");
+
+    // detect mode
+    if (h.classList.contains("heading1")) currentMode = "pomodoro";
+    if (h.classList.contains("heading2")) currentMode = "short";
+    if (h.classList.contains("heading3")) currentMode = "long";
+
+    // reset timer (DO NOT AUTO START)
+    clearInterval(interval);
+    totalSeconds = TIMES[currentMode];
+    updateTimer();
+  });
+});
+
+// ================= START BUTTON =================
+
+startBtn.addEventListener("click", () => {
+  clearInterval(interval)
+  interval = setInterval(() => {
+    if (totalSeconds > 0) {
+      totalSeconds--;
+      updateTimer();
+    } else {
+      clearInterval(interval);
+    }
+  }, 1000);
+});
+
+
+pouseBtn.addEventListener("click",()=>{
+  clearInterval(interval)
+})
+
+
+resetBtn.addEventListener("click", () => {
+  clearInterval(interval);
+
+  totalSeconds = TIMES[currentMode];
+
+  updateTimer();
+});
+
+// ================= INITIAL LOAD =================
+headings.forEach(h => h.classList.remove("active"));
+document.querySelector(".heading1").classList.add("active"); // ✅ pomodoro active
+updateTimer(); // ✅ 25:00 show
