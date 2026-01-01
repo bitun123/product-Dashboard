@@ -20,23 +20,21 @@ openFeature();
 
 // ================== TODO -LIST ==================
 
- function todoList(){
+function todoList() {
   let currentTask = JSON.parse(localStorage.getItem("currentTask")) || [];
 
+  // ================== DOM REFERENCES ==================
+  const taskContainer = document.querySelector(".allTask");
+  const form = document.querySelector(".addTask form");
+  const input = form.querySelector("input");
+  const textarea = form.querySelector("textarea");
+  const checkbox = form.querySelector(".checkBox input");
 
-// ================== DOM REFERENCES ==================
-const taskContainer = document.querySelector(".allTask");
-const form = document.querySelector(".addTask form");
-const input = form.querySelector("input");
-const textarea = form.querySelector("textarea");
-const checkbox = form.querySelector(".checkBox input");
-
-
-// ================== RENDER ==================
-function renderTask() {
-  taskContainer.innerHTML = currentTask
-    .map(
-      (task, index) => `
+  // ================== RENDER ==================
+  function renderTask() {
+    taskContainer.innerHTML = currentTask
+      .map(
+        (task, index) => `
       <div class="task">
         <h2 class="task-title">
           <span class="task-text">${task.task}</span>
@@ -51,73 +49,93 @@ function renderTask() {
         <button data-index="${index}">Mark as Completed</button>
       </div>
     `
-    )
-    .join("");
-}
+      )
+      .join("");
+  }
 
-renderTask();
-
-
-// ================== ADD TASK ==================
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  currentTask.push({
-    task: input.value.trim(),
-    details: textarea.value.trim(),
-    imp: checkbox.checked,
-  });
-
-  localStorage.setItem("currentTask", JSON.stringify(currentTask));
-
-  form.reset();
   renderTask();
-});
 
+  // ================== ADD TASK ==================
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-// ================== DELETE TASK (Event Delegation) ==================
-taskContainer.addEventListener("click", (e) => {
-  if (e.target.tagName === "BUTTON") {
-    const index = Number(e.target.dataset.index);
+    currentTask.push({
+      task: input.value.trim(),
+      details: textarea.value.trim(),
+      imp: checkbox.checked,
+    });
 
-    currentTask.splice(index, 1);
     localStorage.setItem("currentTask", JSON.stringify(currentTask));
 
+    form.reset();
     renderTask();
-  }
+  });
 
-  // Toggle full text
-  if (e.target.classList.contains("task-text")) {
-    e.target.classList.toggle("show-full");
-  }
-});
- }
+  // ================== DELETE TASK (Event Delegation) ==================
+  taskContainer.addEventListener("click", (e) => {
+    if (e.target.tagName === "BUTTON") {
+      const index = Number(e.target.dataset.index);
 
- todoList()
+      currentTask.splice(index, 1);
+      localStorage.setItem("currentTask", JSON.stringify(currentTask));
 
+      renderTask();
+    }
 
-function dailyPlan(){
-  let hours =  Array.from({length: 18},(elem,idx)=>`${6+ idx} :00 - ${7+idx}:00`)
-let dayPlanData = JSON.parse(localStorage.getItem('dayPlanData')) || {};
-let dayPlanner = document.querySelector('.day-planner');
-let wholedaySum = ''
+    // Toggle full text
+    if (e.target.classList.contains("task-text")) {
+      e.target.classList.toggle("show-full");
+    }
+  });
+}
 
-hours.forEach((elem,idx)=>{
-  let saveData = dayPlanData[idx] || ""
-wholedaySum = wholedaySum + `   <div class="day-planner-time">
+todoList();
+
+function dailyPlan() {
+  let hours = Array.from(
+    { length: 18 },
+    (elem, idx) => `${6 + idx} :00 - ${7 + idx}:00`
+  );
+  let dayPlanData = JSON.parse(localStorage.getItem("dayPlanData")) || {};
+  let dayPlanner = document.querySelector(".day-planner");
+  let wholedaySum = "";
+
+  hours.forEach((elem, idx) => {
+    let saveData = dayPlanData[idx] || "";
+    wholedaySum =
+      wholedaySum +
+      `   <div class="day-planner-time">
                     <p>${elem}</p>
                     <input id = ${idx} type="text" placeholder="....." value =" ${saveData}">
                 </div>
-             `
-})
+             `;
+  });
 
-dayPlanner.innerHTML  = wholedaySum;
-let dayPlannerInput  = document.querySelectorAll('.day-planner input');
-dayPlannerInput.forEach((elem)=>{
-elem.addEventListener('input',function(e){
-dayPlanData[elem.id] = elem.value;
-localStorage.setItem('dayPlanData',JSON.stringify(dayPlanData));
-})
-})
+  dayPlanner.innerHTML = wholedaySum;
+  let dayPlannerInput = document.querySelectorAll(".day-planner input");
+  dayPlannerInput.forEach((elem) => {
+    elem.addEventListener("input", function (e) {
+      dayPlanData[elem.id] = elem.value;
+      localStorage.setItem("dayPlanData", JSON.stringify(dayPlanData));
+    });
+  });
 }
-dailyPlan()
+dailyPlan();
+
+
+
+function motivation(){
+  
+let motivationAuthor = document.querySelector(".motivation-3 h1");
+let motivationQuote = document.querySelector(".motivation-2 p");
+async function fetchQuote() {
+  const response = await fetch("https://dummyjson.com/quotes/random");
+  let data = await response.json();
+  console.log(data);
+  motivationQuote.innerHTML = `${data.quote} ,,`;
+  motivationAuthor.innerHTML = `- ${data.author}`;
+}
+fetchQuote();
+
+}
+motivation()

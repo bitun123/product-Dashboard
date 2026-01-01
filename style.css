@@ -1,5 +1,5 @@
 :root {
-    --backgroundColorMain: #8C5E47;
+    --backgroundColorMain: hsl(21, 19%, 20%);
     --backgroundColorSecond: hwb(12 26% 58%);
     --trinary: #e7c5b4;
     --trinary2: #B4846C;
@@ -323,7 +323,7 @@ section.todo-list-full-page .todo-container .allTask .task button:active {
 .daily-list-full-page h1 {
     color: white;
     font-size: 1.2rem;
-padding-left: 1rem;
+    padding-left: 1rem;
 }
 
 .daily-list-full-page .day-planner {
@@ -331,20 +331,20 @@ padding-left: 1rem;
     height: 89%;
     padding: 2rem;
     background-color: var(--backgroundColorMain);
-   display: flex;
- 
-   flex-wrap: wrap;
-   align-items: flex-start;
-   /* justify-content: space-between; */
-   overflow: auto;
-   margin-top: 3rem;
+    display: flex;
+
+    flex-wrap: wrap;
+    align-items: flex-start;
+    /* justify-content: space-between; */
+    overflow: auto;
+    margin-top: 3rem;
 
 }
 
 .daily-list-full-page .day-planner .day-planner-time {
     display: flex;
     align-items: center;
-     position: relative;
+    position: relative;
     /* padding: 1rem; */
     /* background-color: red; */
     margin-bottom: 1rem;
@@ -360,7 +360,7 @@ padding-left: 1rem;
     outline: none;
     font-size: 1rem;
     color: white;
-    
+
 }
 
 .day-planner .day-planner-time p {
@@ -369,6 +369,89 @@ padding-left: 1rem;
     left: 1%;
     color: rgba(255, 255, 0, 0.814);
     font-weight: 550;
+}
+.motivation-container {
+    width: 60%;
+    min-height: 400px;
+    /* background-color: #fff; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 1rem;
+
+}
+
+.motivation-full-page .motivation-container::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: yellow;
+    filter: blur(200px);
+    scale: 1.15;
+    border-radius: 1rem;
+    z-index: 8;
+
+}
+
+.motivation-full-page .motivation-container .motivation-wraper {
+    width: 100%;
+    /* height: 100%; */
+    background-color: orange;
+    z-index: 10;
+    position: absolute;
+    border-radius: 0.5rem;
+    padding: 0.7rem;
+        border: 3px solid var(--backgroundColorMain);
+}
+
+.motivation-1 {
+    /* background-color: var(--trinary); */
+
+    border-radius: 0.4rem;
+}
+
+.motivation-1 h1 {
+    background-color: #3D3029;
+    color: white;
+    width: fit-content;
+    font-size: 2.3rem;
+    font-weight: 500;
+    padding: 0.6rem;
+    border-radius: 0.3rem;
+}
+
+.motivation-2 {
+    margin-top: 1rem;
+    padding: 1rem;
+    /* background-color: #fff; */
+    border-radius: 0.4rem;
+}
+
+.motivation-2 p {
+    font-size: 1.8rem;
+    line-height: 2rem;
+    font-weight: 600;
+}
+
+.motivation-3 {
+    /* width: 100%; */
+    margin-top: 0.5rem;
+    /* background-color: var(--trinary); */
+    padding: 1rem;
+    border-radius: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.motivation-3 h1 {
+    width: fit-content;
+      background-color: #3D3029;
+      padding: 0.6rem;
+      border-radius: 0.4rem;
+      color: white;
 }
 
 @media (min-width:912px) {
@@ -421,14 +504,17 @@ padding-left: 1rem;
     section.todo-list-full-page .todo-container .allTask .task button {
         font-size: 1.2rem;
     }
-       section.daily-list-full-page h1{
+
+    section.daily-list-full-page h1 {
         font-size: 2rem;
         color: rgba(255, 255, 0, 0.477);
-       }
-    section.daily-list-full-page .day-planner{
-        flex-direction: row;
-         justify-content: space-between;
     }
+
+    section.daily-list-full-page .day-planner {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
     .daily-list-full-page .day-planner .day-planner-time {
         width: 49%;
         margin-bottom: 2rem;
