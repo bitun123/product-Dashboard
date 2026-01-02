@@ -553,6 +553,114 @@ section.todo-list-full-page .todo-container .allTask .task button:active {
 }
 
 
+.dailyGoals-fullpage {
+    display: block;
+}
+
+.dailyGoals-fullpage h1 {
+    font-size: 3rem;
+    color: white;
+    padding: 1rem;
+}
+
+.dailyGoals-fullpage .dailyGoals {
+    width: 100%;
+    height: 85%;
+
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.dailyGoals-fullpage .dailyGoals .addgoals {
+    width: 100%;
+    height: 50%;
+    background-color: var(--trinary2);
+    border-radius: 0.5rem;
+    padding: 1rem;
+
+}
+
+.dailyGoals-fullpage .dailyGoals .addgoals form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.dailyGoals-fullpage .dailyGoals .addgoals form h2 {
+    font-size: 1.6rem;
+    color: white;
+    font-weight: 600;
+}
+
+.dailyGoals-fullpage .dailyGoals .addgoals form input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    outline: none;
+    font-size: 1.5rem;
+    color: black;
+}
+
+.dailyGoals-fullpage .dailyGoals .addgoals form button {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 1.5rem;
+    background-color: rgb(65, 65, 239);
+    cursor: pointer;
+}
+
+.dailyGoals-fullpage .dailyGoals .addgoals form button:active {
+    scale: 0.95;
+}
+
+.dailyGoals-fullpage .dailyGoals .allGoals{
+    width: 100%;
+    height: 50%;
+    background-color: var(--trinary2);
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 0.5rem;
+    overflow: auto;
+
+}
+.dailyGoals-fullpage .dailyGoals .allGoals .goals{
+    width: 100%;
+height: fit-content;
+   display: flex;
+justify-content: space-between;
+background-color: #6a6969;
+align-items: center;
+border-radius: 0.5rem;
+}
+.dailyGoals-fullpage .dailyGoals .allGoals .goals h1{
+    font-size: 1.6rem;
+}
+.dailyGoals-fullpage .dailyGoals .allGoals .goals button{
+    height: fit-content;
+    font-size: 1.6rem;
+    padding: 0.5rem 1rem;
+    margin-right: 0.2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.dailyGoals-fullpage .dailyGoals .allGoals .goals button:active{
+    scale: 0.95;
+}
+
 
 @media (min-width:912px) {
     section.allElems {
@@ -629,5 +737,20 @@ section.todo-list-full-page .todo-container .allTask .task button:active {
 
         flex-direction: row;
         justify-content: center;
+    }
+
+    .dailyGoals-fullpage .dailyGoals {
+        flex-direction: row;
+    }
+
+    .dailyGoals-fullpage .dailyGoals .addgoals {
+        width: 35%;
+        height: 100%;
+    }
+    .dailyGoals-fullpage .dailyGoals .addgoals form {
+        margin-top: 2rem;
+    }
+    .dailyGoals-fullpage .dailyGoals .allGoals{
+        height: 100%;
     }
 }

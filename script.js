@@ -137,90 +137,128 @@ function motivation() {
 }
 motivation();
 
+// ================== PROMODORO ==================
+function promodoro() {
+  // ================= SELECT =================
+  const headings = document.querySelectorAll(".heading h1");
+  const timerText = document.querySelector(".timer h2");
+  const startBtn = document.querySelector(".btn .promodoro-btn2");
+  const pouseBtn = document.querySelector(".btn .promodoro-btn3");
+  const resetBtn = document.querySelector(".btn .promodoro-btn1");
 
+  // ================= TIME VALUES =================
+  const TIMES = {
+    pomodoro: 25 * 60,
+    short: 5 * 60,
+    long: 10 * 60,
+  };
 
+  // ================= DEFAULT STATE =================
+  let currentMode = "pomodoro"; // ✅ default
+  let totalSeconds = TIMES[currentMode];
+  let interval = null;
 
+  // ================= UPDATE TIMER =================
+  function updateTimer() {
+    let min = Math.floor(totalSeconds / 60);
+    let sec = totalSeconds % 60;
+    sec = sec < 10 ? "0" + sec : sec;
+    timerText.textContent = `${String(min).padStart(2, "0")}:${String(
+      sec
+    ).padStart(2, "0")}`;
+  }
 
+  // ================= MODE CHANGE =================
+  headings.forEach((h) => {
+    h.addEventListener("click", () => {
+      // active class switch
+      headings.forEach((x) => x.classList.remove("active"));
+      h.classList.add("active");
 
+      // detect mode
+      if (h.classList.contains("heading1")) currentMode = "pomodoro";
+      if (h.classList.contains("heading2")) currentMode = "short";
+      if (h.classList.contains("heading3")) currentMode = "long";
 
+      // reset timer (DO NOT AUTO START)
+      clearInterval(interval);
+      totalSeconds = TIMES[currentMode];
+      updateTimer();
+    });
+  });
 
+  // ================= START BUTTON =================
 
-// ================= SELECT =================
-const headings = document.querySelectorAll(".heading h1");
-const timerText = document.querySelector(".timer h2");
-const startBtn = document.querySelector(".btn .promodoro-btn2");
-const pouseBtn = document.querySelector(".btn .promodoro-btn3");
-const resetBtn = document.querySelector(".btn .promodoro-btn1");
-
-// ================= TIME VALUES =================
-const TIMES = {
-  pomodoro: 25 * 60,
-  short: 5 * 60,
-  long: 10 * 60,
-};
-
-// ================= DEFAULT STATE =================
-let currentMode = "pomodoro";   // ✅ default
-let totalSeconds = TIMES[currentMode];
-let interval = null;
-
-// ================= UPDATE TIMER =================
-function updateTimer() {
-  let min = Math.floor(totalSeconds / 60);
-  let sec = totalSeconds % 60;
-  sec = sec < 10 ? "0" + sec : sec;
-  timerText.textContent = `${String(min).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
-}
-
-// ================= MODE CHANGE =================
-headings.forEach(h => {
-  h.addEventListener("click", () => {
-
-    // active class switch
-    headings.forEach(x => x.classList.remove("active"));
-    h.classList.add("active");
-
-    // detect mode
-    if (h.classList.contains("heading1")) currentMode = "pomodoro";
-    if (h.classList.contains("heading2")) currentMode = "short";
-    if (h.classList.contains("heading3")) currentMode = "long";
-
-    // reset timer (DO NOT AUTO START)
+  startBtn.addEventListener("click", () => {
     clearInterval(interval);
+    interval = setInterval(() => {
+      if (totalSeconds > 0) {
+        totalSeconds--;
+        updateTimer();
+      } else {
+        clearInterval(interval);
+      }
+    }, 1000);
+  });
+
+  pouseBtn.addEventListener("click", () => {
+    clearInterval(interval);
+  });
+
+  resetBtn.addEventListener("click", () => {
+    clearInterval(interval);
+
     totalSeconds = TIMES[currentMode];
+
     updateTimer();
   });
+
+  // ================= INITIAL LOAD =================
+  headings.forEach((h) => h.classList.remove("active"));
+  document.querySelector(".heading1").classList.add("active"); // ✅ pomodoro active
+  updateTimer(); // ✅ 25:00 show
+}
+
+promodoro();
+
+// ================== DAILYgOALS ==================
+
+let form = document.querySelector(".addgoals form");
+let inputValue = document.querySelector(".addgoals form input");
+let allGoals = document.querySelector(".allGoals");
+
+  let  currentGoals = JSON.parse(localStorage.getItem("currentGoals")) || [];
+
+function renderGoals() {
+  allGoals.innerHTML = currentGoals.map((goal, idx) => {
+return  `            <div class="goals">
+                        <h1> ${goal.goals} </h1>
+                        <button id= "${idx}">complete</button>
+                        </div> `
+  })
+.join("");
+}
+renderGoals();
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  currentGoals.push({
+    goals: inputValue.value
+  });
+   localStorage.setItem("currentGoals", JSON.stringify(currentGoals));
+  inputValue.value = "";
+  renderGoals();
 });
 
-// ================= START BUTTON =================
 
-startBtn.addEventListener("click", () => {
-  clearInterval(interval)
-  interval = setInterval(() => {
-    if (totalSeconds > 0) {
-      totalSeconds--;
-      updateTimer();
-    } else {
-      clearInterval(interval);
+
+allGoals.addEventListener("click",(e)=>{
+
+    if (e.target.tagName === "BUTTON") {
+      const index = Number(e.target.dataset.idx);
+
+      currentGoals.splice(index, 1);
+      localStorage.setItem("currentGoals", JSON.stringify(currentGoals));
+      renderGoals();
     }
-  }, 1000);
-});
-
-
-pouseBtn.addEventListener("click",()=>{
-  clearInterval(interval)
 })
 
-
-resetBtn.addEventListener("click", () => {
-  clearInterval(interval);
-
-  totalSeconds = TIMES[currentMode];
-
-  updateTimer();
-});
-
-// ================= INITIAL LOAD =================
-headings.forEach(h => h.classList.remove("active"));
-document.querySelector(".heading1").classList.add("active"); // ✅ pomodoro active
-updateTimer(); // ✅ 25:00 show
