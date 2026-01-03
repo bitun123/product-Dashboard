@@ -270,6 +270,7 @@ dailyGoals();
 // let api = "http://api.weatherapi.com/v1/current.json?key=&q=London&aqi=no"
 let apiKey = "7fc4ea75c4c146ce9b345237260301";
 let locations = 'kolkata'
+
 let city =  document.querySelector('.left #city');
 let time = document.querySelector('.left #localtime');
 let state = document.querySelector('.left #state');

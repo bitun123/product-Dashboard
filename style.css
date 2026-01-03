@@ -39,44 +39,39 @@ body {
 
 #main {
     width: 100%;
-    height: 100%;
+    min-height: 100vh;              /* 🔑 FIX */
     background-color: var(--trinary2);
     color: aliceblue;
 }
 
-
-
 section.allElems {
     width: 100%;
-    height: 100%;
+    min-height: 100vh;              /* 🔑 FIX */
     padding: 1rem;
     background-color: var(--trinary2);
-    position: absolute;
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
+
+/* ================= HEADER ================= */
 
 .allElems header {
     width: 100%;
     min-height: 16rem;
     border-radius: 0.5rem;
     padding: 0.5rem;
-    position: relative;
-    /* 🔑 REQUIRED */
+    position: relative;             /* 🔑 */
     overflow: hidden;
-    /* 🔑 keeps video inside */
     display: flex;
+    align-items: center;
 }
 
 /* VIDEO BACKGROUND */
 .allElems header .video-wrapper {
     position: absolute;
-    /* 🔑 NOT fixed */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     z-index: 0;
 }
 
@@ -86,16 +81,14 @@ section.allElems {
     object-fit: cover;
 }
 
-/* CONTENT ON TOP */
+/* HEADER CONTENT (FIXED) */
 .allElems header .content {
-    position: relative;
+    position: relative;             /* 🔑 FIX (absolute → relative) */
     z-index: 2;
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    /* justify-content: space-between;
-  align-items: center; */
     padding: 0.5rem;
 }
 
@@ -103,11 +96,11 @@ section.allElems {
 .allElems header h1,
 .allElems header h1 span {
     color: white;
-    /* 🔑 black won't be visible on video */
     font-size: 2.3rem;
     font-weight: 600;
 }
 
+/* ================= FEATURES ================= */
 
 .allElems .allFeatures {
     display: flex;
@@ -117,11 +110,9 @@ section.allElems {
     gap: 2rem;
 }
 
-
 .elem {
     height: 20rem;
     width: 16rem;
-    font-size: 30px;
     border-radius: 20px;
     overflow: hidden;
     transition: all ease 0.3s;
@@ -129,25 +120,26 @@ section.allElems {
     cursor: pointer;
 }
 
-.elem>img {
+.elem > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-
 }
 
 .elem:active {
     scale: 0.96;
 }
 
-.elem>h1 {
+.elem > h1 {
     position: absolute;
     bottom: 1rem;
-    font-size: 1.5rem;
     right: 1rem;
     font-family: bold;
+    font-size: 1.5rem;
     color: var(--text);
 }
+
+/* ================= FULL PAGE SECTION ================= */
 
 section.fullElems {
     width: 100%;
@@ -155,7 +147,10 @@ section.fullElems {
     background-color: var(--backgroundColorMain);
     display: none;
     position: fixed;
+    inset: 0;
+    z-index: 99;
 }
+
 
 section.todo-list-full-page {
     /* display: flex; */
