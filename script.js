@@ -222,7 +222,8 @@ function promodoro() {
 promodoro();
 
 // ================== DAILYgOALS ==================
-
+function dailyGoals(){
+  
 let form = document.querySelector(".addgoals form");
 let inputValue = document.querySelector(".addgoals form input");
 let allGoals = document.querySelector(".allGoals");
@@ -261,4 +262,29 @@ allGoals.addEventListener("click",(e)=>{
       renderGoals();
     }
 })
+}
+
+dailyGoals();
+
+
+// let api = "http://api.weatherapi.com/v1/current.json?key=&q=London&aqi=no"
+let apiKey = "7fc4ea75c4c146ce9b345237260301";
+let locations = 'kolkata'
+let city =  document.querySelector('.left #city');
+let time = document.querySelector('.left #localtime');
+let state = document.querySelector('.left #state');
+let temp = document.querySelector('.right #temp span');
+let wind = document.querySelector('.right #wind span');
+async function weatherCall(){
+  let response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${locations}&aqi=yes`)
+let data = await response.json();
+city.innerText = data.location.name;
+time.innerText = data.location.localtime;
+state.innerText = data.location.region;
+temp.innerText = data.current.temp_c;
+wind.innerText = data.current.wind_kph;
+
+}
+weatherCall()
+
 

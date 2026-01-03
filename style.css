@@ -33,42 +33,92 @@ body {
 
     width: 100%;
     height: 100%;
+    background-color: var(--trinary2);
 }
 
 
 #main {
     width: 100%;
     height: 100%;
-    background-color: var(--backgroundColorMain);
+    background-color: var(--trinary2);
     color: aliceblue;
 }
 
-nav {
-    position: fixed;
-    width: 100%;
-    height: 4rem;
-    background-color: var(--trinary);
-    z-index: 99;
-}
+
 
 section.allElems {
-
     width: 100%;
-    padding: 2rem;
-    padding-top: 6rem;
+    height: 100%;
+    padding: 1rem;
     background-color: var(--trinary2);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.allElems header {
+    width: 100%;
+    min-height: 16rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    position: relative;
+    /* 🔑 REQUIRED */
+    overflow: hidden;
+    /* 🔑 keeps video inside */
+    display: flex;
+}
+
+/* VIDEO BACKGROUND */
+.allElems header .video-wrapper {
+    position: absolute;
+    /* 🔑 NOT fixed */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* CONTENT ON TOP */
+.allElems header .content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* justify-content: space-between;
+  align-items: center; */
+    padding: 0.5rem;
+}
+
+/* TEXT STYLING */
+.allElems header h1,
+.allElems header h1 span {
+    color: white;
+    /* 🔑 black won't be visible on video */
+    font-size: 2.3rem;
+    font-weight: 600;
+}
+
+
+.allElems .allFeatures {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    position: absolute;
-
 }
 
 
 .elem {
-    background-color: #feba17;
     height: 20rem;
     width: 16rem;
     font-size: 30px;
@@ -76,6 +126,7 @@ section.allElems {
     overflow: hidden;
     transition: all ease 0.3s;
     position: relative;
+    cursor: pointer;
 }
 
 .elem>img {
@@ -622,7 +673,7 @@ section.todo-list-full-page .todo-container .allTask .task button:active {
     scale: 0.95;
 }
 
-.dailyGoals-fullpage .dailyGoals .allGoals{
+.dailyGoals-fullpage .dailyGoals .allGoals {
     width: 100%;
     height: 50%;
     background-color: var(--trinary2);
@@ -634,19 +685,22 @@ section.todo-list-full-page .todo-container .allTask .task button:active {
     overflow: auto;
 
 }
-.dailyGoals-fullpage .dailyGoals .allGoals .goals{
+
+.dailyGoals-fullpage .dailyGoals .allGoals .goals {
     width: 100%;
-height: fit-content;
-   display: flex;
-justify-content: space-between;
-background-color: #6a6969;
-align-items: center;
-border-radius: 0.5rem;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    background-color: #6a6969;
+    align-items: center;
+    border-radius: 0.5rem;
 }
-.dailyGoals-fullpage .dailyGoals .allGoals .goals h1{
+
+.dailyGoals-fullpage .dailyGoals .allGoals .goals h1 {
     font-size: 1.6rem;
 }
-.dailyGoals-fullpage .dailyGoals .allGoals .goals button{
+
+.dailyGoals-fullpage .dailyGoals .allGoals .goals button {
     height: fit-content;
     font-size: 1.6rem;
     padding: 0.5rem 1rem;
@@ -657,7 +711,8 @@ border-radius: 0.5rem;
     outline: none;
     cursor: pointer;
 }
-.dailyGoals-fullpage .dailyGoals .allGoals .goals button:active{
+
+.dailyGoals-fullpage .dailyGoals .allGoals .goals button:active {
     scale: 0.95;
 }
 
@@ -747,10 +802,18 @@ border-radius: 0.5rem;
         width: 35%;
         height: 100%;
     }
+
     .dailyGoals-fullpage .dailyGoals .addgoals form {
         margin-top: 2rem;
     }
-    .dailyGoals-fullpage .dailyGoals .allGoals{
+
+    .dailyGoals-fullpage .dailyGoals .allGoals {
         height: 100%;
+    }
+
+    .allElems header .content {
+        justify-content: space-around;
+        flex-direction: row;
+        align-items: center;
     }
 }
